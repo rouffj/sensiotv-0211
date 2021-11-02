@@ -1,0 +1,152 @@
+{% macro render_review(review) %}
+    <div class="row p-sm-5">
+        <div class="col-md-2">
+            <p class="p-1 m-0"><span class="font-weight-bold">{{ review.user.firstName }} {{ review.user.lastName }} </span></p>
+        </div>
+        <div class="col-md-10">
+            <div class="text-warning font-weight-bold">
+                {% for star in range(1, review.rating) %}<i class="fas fa-star"></i>{% endfor %}
+                {{ review.rating }}
+            </div>
+            <p>{{ review.body }}</p>
+            <p>
+                {% if is_granted('REVIEW_EDIT', review)  %}
+                    <a href="#">Edit</a>
+                {% endif %}
+                {% if is_granted('REVIEW_DELETE', review)  %}
+                    | <a href="#">Delete</a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro login_section() %}
+    {% if app.user %}
+        <span style="color: #fff">Hi {{ app.user.firstName }} | <a href="{{ logout_path() }}">Logout</a>
+            {% if app.user.lastLoginAt() is defined %} | last login: {{ app.user.lastLoginAt()|date }} {% endif %}
+        </span>
+    {% else %}
+        <li class="nav-item active"><a class="nav-link" href="/register" title="Register or log in"><i class="fas fa-plus-square"></i></a></li>
+        <li class="nav-item active"><a class="nav-link" href="/login" title="Register or log in"><i class="fas fa-user"></i></a></li>
+    {% endif %}
+{% endmacro %}
+
+
+{% macro render_movie(movie) %}
+    <tr>
+        <td><img src="{{ movie.Poster }}" width="45" height="67" alt="{{ movie.Title }}"></td>
+        <td>{{ movie.Title }} <span class="text-muted">({{ movie.Year }})</td>
+        <td>
+            {# if is_granted('ROLE_USER') #}
+            <a href="/movie/{{ movie.imdbID }}/import" title="Import movie data from IMDB into database"><i class="far fa-arrow-alt-circle-down"></i></a>
+            {# endif #}
+            <a style="padding-left: 3px" href="https://www.imdb.com/title/{{ movie.imdbID }}/" title="Show movie on IMDB"><i class="far fa-eye"></i></a>
+        </td>
+    </tr>
+{% endmacro %}
+
+
+{% macro render_imported_movie(movie) %}
+    <div class="row">
+        <div class="col-lg-3">
+            <a href="/movie/{{ movie.id }}" title="The Matrix Reloaded" class="album-link">
+                <img height="209" width="140" src="{{ movie.poster }}">
+            </a>
+        </div>
+        <div class="col-lg-9">
+            <a href="/movie/{{ movie.id }}" title="Click to see the movie details"><h6 class="m-1 font-weight-bold">{{ movie.title }}</h6></a>
+            <small class="text-success font-weight-bold m-1">{{ movie.releaseDate|date('Y-m-d') }}</small>
+            <p class="ml-1 mr-1 mt-3 mb-2"><span class="text-muted">{{ movie.plot }}</span></p>
+        </div>
+    </div>
+    <hr />
+{% endmacro %}
+
+
+
+{% macro display_flash_messages(messageType) %}
+    {% for message in app.flashes(messageType) %}
+        <p style="margin: 70px 10px 10px;" class="alert alert-{{ messageType }}">{{ message }}</p>
+    {% endfor %}
+{% endmacro %}
+
+{% macro render_show_movie(movie) %}
+    <div class="row mb-5">
+        <div class="col-lg-10">
+            <h1 class="display-4 font-weight-bold">{{ movie.title }} ({{ movie.releaseDate|date('Y') }}).</h1>
+            <p class="text-success font-weight-bold">{{ movie.releaseDate|date }}</p>
+        </div>
+        <div class="col-lg-2 my-auto">
+            <h2 class="font-weight-bold"><i class="fas fa-star text-warning"></i> 8,5/10</h2>
+            <small>613,329 votes</small>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-lg-3 pb-3">
+            <div class="row text-center">
+                <div class="col-lg-12 pl-4 pr-4">
+                    <a href="/trailer-player.html" title="See Avengers Endgame trailer" class="album-link">
+                        <img class="img-rounded img-fluid" src="{{ movie.poster }}" alt="Empty Cart Logo">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="/trailer-player.html" title="See Avengers Endgame trailer" class="btn btn-sm btn-outline-success mt-3" role="button"><i class="fas fa-eye"></i> Watch the trailer</a>
+                    <a href="/user/cart" title="Add this movie to your cart" class="btn btn-sm btn-dark mt-3" role="button"><i class="fas fa-plus"></i> Add to cart: <b>09,99€</b></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 img-rounded bg-light p-4">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true"><i class="fas fa-home"></i></a>
+                </li>
+            </ul>
+            <div class="tab-content">
+
+                <!-- Details -->
+                <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+                    <div class="row pt-4 text-muted">
+                        <div class="col">
+                            <p>{{ movie.plot }}</p>
+                        </div>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-md-2">
+                            <p class="font-weight-bold">Directors:</p>
+                        </div>
+                        <div class="col-md-10 text-muted">
+                            <a href="#" title="See this director">Anthony Russo</a>, <a href="#" title="See this director">Joe Russo</a>
+                        </div>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-md-2">
+                            <p class="font-weight-bold">Writers:</p>
+                        </div>
+                        <div class="col-md-10 text-muted">
+                            <a href="#" title="See this writer">Christopher Markus (screenplay by)</a>, <a href="#" title="See this writer">Stephen McFeely (screenplay by)</a>, <a href="#" title="See this writer">Stan Lee (based on the Marvel comics by)</a>, <a href="#" title="See this writer">Jack Kirby (based on the Marvel comics by)</a>, <a href="#" title="See this writer">Joe Simon (Captain America created by)</a>, <a href="#" title="See this writer">Jack Kirby (Captain America created by)</a>, <a href="#" title="See this writer">Steve Englehart (Star-Lord created by)</a>, <a href="#" title="See this writer">Steve Gan (Star-Lord created by)</a>, <a href="#" title="See this writer">Bill Mantlo (Rocket Raccoon created by)</a>, <a href="#" title="See this writer">Keith Giffen (Rocket Raccoon created by)</a>, <a href="#" title="See this writer">Jim Starlin (Thanos)</a>, <a href="#" title="See this writer">Gamora & Drax (created by)</a>, <a href="#" title="See this writer">Stan Lee (Groot created by)</a>, <a href="#" title="See this writer">Larry Lieber (Groot created by)</a>, <a href="#" title="See this writer">Jack Kirby (Groot created by)</a>, <a href="#" title="See this writer">Steve Englehart (Mantis created by)</a>, <a href="#" title="See this writer">Don Heck (Mantis created by)</a>
+                        </div>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-md-2">
+                            <p class="font-weight-bold">Actors:</p>
+                        </div>
+                        <div class="col-md-10 text-muted">
+                            <a href="#" title="See this actor">Robert Downey Jr.</a>, <a href="#" title="See this actor">Chris Evans</a>, <a href="#" title="See this actor">Mark Ruffalo</a>, <a href="#" title="See this actor">Chris Hemsworth</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col my-auto img-rounded bg-light pt-4 pb-4">
+            <p class="m-0">
+                <span class="good-score">78</span> Metascore | <span class="good-score">94</span> Rotten Tomatoes | <span class="good-score">78/100</span> Metacritic
+            </p>
+        </div>
+    </div>
+
+{% endmacro %}
+
