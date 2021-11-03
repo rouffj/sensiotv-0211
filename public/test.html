@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+PHPUnit 9.5.10 by Sebastian Bergmann and contributors.
+
+Testing 
+.<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,10 +14,9 @@
     <meta property="og:title" content="SensioTV from SensioLabs University - Home">
     <meta property="og:description" content="An awesome SensioLabs University project to order some cool movies.">
 
-    <title>SensioTV - {% block title '' %}</title>
+    <title>SensioTV - </title>
 
     <!-- Vendor CSS -->
-    {{ encore_entry_link_tags('app') }}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
     <!-- Personal CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/css/sensiotv-theme.min.css">
@@ -52,9 +54,37 @@
 </header>
 
 <main id="main">
-    {% block body %}
-        @@@@
-    {% endblock %}
+    
+        <section class="bg-light mb-5 mt-5">
+        <div class="container pb-5 pt-5">
+            <div class="row pb-5 pt-5">
+                <div class="col-md-10 mx-auto">
+                    <h1 class="font-weight-bold display-4 mt-2 ml-3 mb-5">Create your account.</h1>
+
+                    <form name="user" method="post" novalidate=""><div id="user" novalidate=""><div class="form-group row"><label class="col-form-label col-sm-2 required" for="user_firstName">First name</label><div class="col-sm-10"><input type="text" id="user_firstName" name="user[firstName]" required="required" class="form-control" value="Joseph" /></div>
+    </div><div class="form-group row"><label class="col-form-label col-sm-2 required" for="user_lastName">Last name</label><div class="col-sm-10"><input type="text" id="user_lastName" name="user[lastName]" required="required" class="form-control" value="ROUFF" /></div>
+    </div><div class="form-group row is-invalid"><label class="col-form-label col-sm-2 required" for="user_email">Email<span class="invalid-feedback d-block"><span class="d-block">
+                    <span class="form-error-icon badge badge-danger text-uppercase">Error</span> <span class="form-error-message">This value is already used.</span>
+                </span></span></label><div class="col-sm-10"><input type="email" id="user_email" name="user[email]" required="required" class="form-control is-invalid" value="joseph2@joseph.io" /></div>
+    </div><div class="form-group row"><label class="col-form-label col-sm-2 required" for="user_phone">Phone</label><div class="col-sm-10"><input type="tel" id="user_phone" name="user[phone]" required="required" class="form-control" /></div>
+    </div><div class="form-group row"><label class="col-form-label col-sm-2 required" for="user_password_first">Password</label><div class="col-sm-10"><input type="password" id="user_password_first" name="user[password][first]" required="required" class="form-control" /></div>
+    </div><div class="form-group row"><label class="col-form-label col-sm-2 required" for="user_password_second">Repeat Password</label><div class="col-sm-10"><input type="password" id="user_password_second" name="user[password][second]" required="required" class="form-control" /></div>
+    </div><div class="form-group row"><div class="col-sm-2"></div><div class="col-sm-10"><div class="form-check">        <input type="checkbox" id="user_terms" name="user[terms]" required="required" class="form-check-input" value="1" checked="checked" />
+        <label class="form-check-label required" for="user_terms">Click here to indicate that you have read and agree to the terms presented in the Terms and Conditions agreement</label></div><small id="user_terms_help" class="form-text text-muted">Your email and information are used to allow you to sign in securely and access your data. SensioTV records certain usage data for security, support and reporting purposes.</small></div></div><div class="form-group row"><div class="col-sm-2"></div><div class="col-sm-10"><button type="submit" id="user_submit" name="user[submit]" class="btn-primary btn">Create your SensioTV account</button></div></div><input type="hidden" id="user__token" name="user[_token]" value="988615327b33fc974a913.FB80dzlb4KxcmW1HwKnepPRNxwQiQnRToDdYmrVy_yE.XH1RQ2NoqsVr_RV0hcKI0oAsjFxPekA1zwUvrMIksGNsRgQPYBLQzjagDg" /></div></form>
+
+                    <div class="mt-4">
+                        <p>
+                            <a href="/password-recovering.html" title="Get a new password sent by email">Forgotten your password ? <i class="far fa-arrow-alt-circle-right"></i></a>
+                            <br>
+                            <a href="/login" title="Log in to your SensioTV account">You have an account ? Log in now. <i class="far fa-arrow-alt-circle-right"></i></a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
 </main>
 
 <footer class="container py-5 mt-5 mb-5">
@@ -89,7 +119,6 @@
 </footer>
 
 <!-- Vendor JS -->
-{{ encore_entry_script_tags('app') }}
 <script src="https://kit.fontawesome.com/8d75946265.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

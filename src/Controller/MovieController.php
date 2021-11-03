@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Movie;
+use App\Entity\Review;
 use App\OmdbApi;
 use App\Repository\MovieRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,6 +65,27 @@ class MovieController extends AbstractController
         return $this->render('movie/show.html.twig', [
             'id' => $id,
         ]);
+    }
+
+    /**
+     * @Route("/add_comment/{movieId}/{userId}/{body}", name="add_comment")
+     */
+    public function addReview(int $movieId, int $userId, string $body, MovieRepository $movieRepo, UserRepository $userRepo): Response
+    {
+        $movie = $movieRepo->find($movieId);
+        $user = $userRepo->find($userId);
+
+        $review = new Review();
+        $review
+            ->setMovie($movie)
+            ->setUser($user)
+            ->setBody($body)
+            ->setRating(4)
+        ;
+        dump($review);
+
+        $this->entityManager->persist($review);
+        $this->entityManager->flush();
     }
 
     /**

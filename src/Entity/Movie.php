@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +47,11 @@ class Movie
      * @ORM\Column(type="string", length=10)
      */
     private $duration;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Review::class, mappedBy="movie", orphanRemoval=true)
+     */
+    private $reviews;
 
     public function __construct()
     {
@@ -142,5 +148,35 @@ class Movie
             ->setDuration($movieInfo['Runtime']);
 
         return $movie;
+    }
+
+    /**
+     * @return Collection|Review[]
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews[] = $review;
+            $review->setMovie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getMovie() === $this) {
+                $review->setMovie(null);
+            }
+        }
+
+        return $this;
     }
 }
