@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\OmdbApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,18 @@ class MovieController extends AbstractController
     /**
      * @Route("/search", name="search")
      */
-    public function search(): Response
+    public function search(Request $request, OmdbApi $omdbApi): Response
     {
-        return $this->render('movie/search.html.twig');
+        $keyword = $request->query->get('keyword', 'Sky');
+        $search = $omdbApi->requestAllBySearch($keyword);
+
+        dump($search);
+
+        return $this->render('movie/search.html.twig', [
+            'keyword' => $keyword,
+            'movies' => $search['Search'],
+            'nb_movies' => $search['totalResults'],
+        ]);
     }
 
     /**

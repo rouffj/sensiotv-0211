@@ -3,14 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="0f00599c-9c50-4f9b-b992-182be3500aa8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MovieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MovieController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/homepage.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/homepage.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/movie/latest.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/movie/latest.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/movie/search.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/movie/search.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/movie/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/movie/show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/user/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/register.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/signin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/signin.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,6 +155,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="20MICV3uHgKB7xnKDT6mnMq2jqZ" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -181,7 +184,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1635847902581</updated>
-      <workItem from="1635847903942" duration="9023000" />
+      <workItem from="1635847903942" duration="20426000" />
     </task>
     <servers />
   </component>
