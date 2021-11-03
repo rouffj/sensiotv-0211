@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -29,7 +30,8 @@ class User
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=200)
+     * @ORM\Column(type="string", length=200, unique=true)
+     * @Assert\Email(message="Sorry but your email {{ value }} should be changed")
      */
     private $email;
 
@@ -40,12 +42,27 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=7)
+     * @   Assert\Expression("this.getEmail() != this.getPassword()", message="Email should not be used inside password")
      */
     private $password;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @Assert\IsTrue(message="Your password should not contain your email")
+     * @return bool
+     */
+    public function isPasswordValid(): bool
+    {
+        if (false === strpos($this->password, $this->email)) {
+            return true;
+        }
+
+        return false;
     }
 
     public function getFirstName(): ?string
