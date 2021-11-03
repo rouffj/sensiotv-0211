@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% import 'macros.html.twig' as macros %}
 
 {% block body %}
 
@@ -38,85 +39,13 @@
                 </div>
                 <div class="col-md-9 table-responsive img-rounded bg-light p-4">
                     <!-- Latest movies -->
-                                        <div class="row">
-                        <div class="col-lg-3">
-                            <a href="/movie/1" title="The Matrix Reloaded" class="album-link">
-                                <img height="209" width="140" src="https://m.media-amazon.com/images/M/MV5BODE0MzZhZTgtYzkwYi00YmI5LThlZWYtOWRmNWE5ODk0NzMxXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg">
-                            </a>
-                        </div>
-                        <div class="col-lg-9">
-                            <a href="/movie/1" title="Click to see the movie details"><h6 class="m-1 font-weight-bold">The Matrix Reloaded</h6></a>
-                            <small class="text-success font-weight-bold m-1">2003-05-15</small>
-                            <p class="ml-1 mr-1 mt-3 mb-2"><span class="text-muted">Freedom fighters Neo, Trinity and Morpheus continue to lead the revolt against the Machine Army, unleashing their arsenal of extraordinary skills and weaponry against the systematic forces of repression and exploitation.</span></p>
-                        </div>
-                    </div>
-                    <hr>
-                                        <div class="row">
-                        <div class="col-lg-3">
-                            <a href="/movie/2" title="Harry Potter and the Sorcerer&#039;s Stone" class="album-link">
-                                <img height="209" width="140" src="https://m.media-amazon.com/images/M/MV5BNjQ3NWNlNmQtMTE5ZS00MDdmLTlkZjUtZTBlM2UxMGFiMTU3XkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_SX300.jpg">
-                            </a>
-                        </div>
-                        <div class="col-lg-9">
-                            <a href="/movie/2" title="Click to see the movie details"><h6 class="m-1 font-weight-bold">Harry Potter and the Sorcerer&#039;s Stone</h6></a>
-                            <small class="text-success font-weight-bold m-1">2001-11-16</small>
-                            <p class="ml-1 mr-1 mt-3 mb-2"><span class="text-muted">An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world.</span></p>
-                        </div>
-                    </div>
-                    <hr>
-                                        <div class="row">
-                        <div class="col-lg-3">
-                            <a href="/movie/3" title="Hello Mini" class="album-link">
-                                <img height="209" width="140" src="https://m.media-amazon.com/images/M/MV5BNTFiOTkyNjktZGM1Zi00MDhhLThhYjAtODUwNDVhYzJjOTEwXkEyXkFqcGdeQXVyMTE0Nzg1NjQ2._V1_SX300.jpg">
-                            </a>
-                        </div>
-                        <div class="col-lg-9">
-                            <a href="/movie/3" title="Click to see the movie details"><h6 class="m-1 font-weight-bold">Hello Mini</h6></a>
-                            <small class="text-success font-weight-bold m-1">2019-10-01</small>
-                            <p class="ml-1 mr-1 mt-3 mb-2"><span class="text-muted">A thriller drama series, revolving around Rivanah Bannerjee, an independent girl, living alone in Mumbai. She has the perfect life: doting parents, a loving boyfriend, and a great job. But things are seldom what they seem, as her lif</span></p>
-                        </div>
-                    </div>
-                    <hr>
-                                        <div class="row">
-                        <div class="col-lg-3">
-                            <a href="/movie/4" title="Fight Club" class="album-link">
-                                <img height="209" width="140" src="https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg">
-                            </a>
-                        </div>
-                        <div class="col-lg-9">
-                            <a href="/movie/4" title="Click to see the movie details"><h6 class="m-1 font-weight-bold">Fight Club</h6></a>
-                            <small class="text-success font-weight-bold m-1">1999-10-15</small>
-                            <p class="ml-1 mr-1 mt-3 mb-2"><span class="text-muted">An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.</span></p>
-                        </div>
-                    </div>
-                    <hr>
-                                        <div class="row">
-                        <div class="col-lg-3">
-                            <a href="/movie/5" title="Iron Sky" class="album-link">
-                                <img height="209" width="140" src="https://m.media-amazon.com/images/M/MV5BMTM2MDg5MzgxNF5BMl5BanBnXkFtZTcwODUzNjMxOA@@._V1_SX300.jpg">
-                            </a>
-                        </div>
-                        <div class="col-lg-9">
-                            <a href="/movie/5" title="Click to see the movie details"><h6 class="m-1 font-weight-bold">Iron Sky</h6></a>
-                            <small class="text-success font-weight-bold m-1">2012-04-04</small>
-                            <p class="ml-1 mr-1 mt-3 mb-2"><span class="text-muted">The Nazis set up a secret base on the dark side of the moon in 1945 where they hide out and plan to return to power in 2018.</span></p>
-                        </div>
-                    </div>
-                    <hr>
-                                        <div class="row">
-                        <div class="col-lg-3">
-                            <a href="/movie/6" title="Harry Potter and the Deathly Hallows: Part 2" class="album-link">
-                                <img height="209" width="140" src="https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg">
-                            </a>
-                        </div>
-                        <div class="col-lg-9">
-                            <a href="/movie/6" title="Click to see the movie details"><h6 class="m-1 font-weight-bold">Harry Potter and the Deathly Hallows: Part 2</h6></a>
-                            <small class="text-success font-weight-bold m-1">2011-07-15</small>
-                            <p class="ml-1 mr-1 mt-3 mb-2"><span class="text-muted">Harry, Ron, and Hermione search for Voldemort&#039;s remaining Horcruxes in their effort to destroy the Dark Lord as the final battle rages on at Hogwarts.</span></p>
-                        </div>
-                    </div>
-                    <hr>
-                                    </div>
+
+                    {% for movie in movies %}
+                        {{ macros.render_imported_movie(movie) }}
+                    {% else %}
+                        <p>No movie imported yet.</p>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </section>

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Movie;
 use App\OmdbApi;
+use App\Repository\MovieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,9 +46,13 @@ class MovieController extends AbstractController
     /**
      * @Route("/latest", name="latest")
      */
-    public function latest(): Response
+    public function latest(MovieRepository $movieRepository): Response
     {
-        return $this->render('movie/latest.html.twig');
+        $movies = $movieRepository->findBy([], ['id' => 'DESC']);
+
+        return $this->render('movie/latest.html.twig', [
+            'movies' => $movies,
+        ]);
     }
 
     /**
