@@ -9,13 +9,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Event\RegistrationSucceedEvent;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class UserController extends AbstractController
 {
     /**
      * @Route("/register", name="register")
      */
-    public function register(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
+    public function register(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, EventDispatcherInterface $eventDispatcher): Response
     {
         $form = $this->createForm(UserType::class);
         $form->handleRequest($request);
@@ -27,8 +30,17 @@ class UserController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $eventDispatcher->dispatch(new RegistrationSucceedEvent($user), 'registration_succeed');
             dump($user);
         }
+
+        // Avatar image should minified + send to AWS S3 as asynchronous task.
+        $eventDispatcher->addListener('kernel.terminate', function(Event $e) {
+            dump($e);
+            dump('helloo from terminate');
+            sleep(4);
+        });
 
         return $this->render('user/register.html.twig', [
             'form' => $form->createView(),
