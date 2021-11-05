@@ -38,9 +38,9 @@
         <td><img src="{{ movie.Poster }}" width="45" height="67" alt="{{ movie.Title }}"></td>
         <td>{{ movie.Title }} <span class="text-muted">({{ movie.Year }})</td>
         <td>
-            {# if is_granted('ROLE_USER') #}
+            {% if is_granted('ROLE_ADMIN') %}
             <a href="/movie/{{ movie.imdbID }}/import" title="Import movie data from IMDB into database"><i class="far fa-arrow-alt-circle-down"></i></a>
-            {# endif #}
+            {% endif %}
             <a style="padding-left: 3px" href="https://www.imdb.com/title/{{ movie.imdbID }}/" title="Show movie on IMDB"><i class="far fa-eye"></i></a>
         </td>
     </tr>

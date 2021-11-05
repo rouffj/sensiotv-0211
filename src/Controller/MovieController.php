@@ -8,10 +8,12 @@ use App\OmdbApi;
 use App\Repository\MovieRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/movie", name="movie_", methods={"GET"})
@@ -60,11 +62,11 @@ class MovieController extends AbstractController
     /**
      * @Route("/{id}", name="show", requirements={"id": "\d+"})
      */
-    public function show(int $id, Request $request): Response
+    public function show(Movie $movie, Request $request): Response
     {
-        return $this->render('movie/show.html.twig', [
-            'id' => $id,
-        ]);
+        $this->denyAccessUnlessGranted('MOVIE_SHOW', $movie);
+
+        return $this->render('movie/show.html.twig');
     }
 
     /**
@@ -90,9 +92,18 @@ class MovieController extends AbstractController
 
     /**
      * @Route("/{imdbId}/import", requirements={"imdbId": "\w\w\d+"})
+     * @ IsGranted("ROLE_ADMIN", message="You should be an admin to import a movie from the API")
      */
     public function import(string $imdbId): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            // allow to display the error message when redirected to login page
+            $message = 'You should be an admin to import a movie from the API';
+            $this->addFlash('error', $message);
+
+            throw new AccessDeniedException($message);
+        }
+
         $movieData = $this->omdbApi->requestOneById($imdbId);
 
         if (!$movieData) {
