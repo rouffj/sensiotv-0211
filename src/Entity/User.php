@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation as Api;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -43,6 +45,8 @@ class User
     private $phone;
 
     /**
+     * @ Api\Groups({"user_read"})
+     * @ Api\Ignore()
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min=7)
      * @   Assert\Expression("this.getEmail() != this.getPassword()", message="Email should not be used inside password")
@@ -50,6 +54,8 @@ class User
     private $password;
 
     /**
+     * @Api\Groups("RELATION")
+     * @Api\Ignore
      * @ORM\OneToMany(targetEntity=Review::class, mappedBy="user", orphanRemoval=true)
      */
     private $reviews;
